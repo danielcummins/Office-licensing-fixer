@@ -38,10 +38,11 @@ namespace Office_licensing_fixer
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
             cmd.WaitForExit();
-            //listBox1.Items.Add(cmd.StandardOutput.ReadToEnd());
-            //MessageBox.Show(cmd.StandardOutput.ReadToEnd());
+            
 
             string statusoutput = cmd.StandardOutput.ReadToEnd();
+
+            //declar the string to search for
             string s = "key:";
 
             List<string> keys = new List<string>();
@@ -82,7 +83,7 @@ namespace Office_licensing_fixer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //check if run as admin
+            //check if run as admin and save as bool
             var identity = WindowsIdentity.GetCurrent();
             var principal = new WindowsPrincipal(identity);
             bool isadmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
@@ -90,8 +91,7 @@ namespace Office_licensing_fixer
 
             FormBorderStyle = FormBorderStyle.FixedSingle;
             button1.Enabled = false;
-            listBox1.Items.Add("DANIEL CUMMINS SOFTWARE SOLUTIONS LIMITED");
-            listBox1.Items.Add("Loading......");
+            
             if (isadmin == false)
             {
                 listBox1.Items.Add("ERROR: Please run this as Admin");
@@ -104,7 +104,7 @@ namespace Office_licensing_fixer
             string office16filelocation = @"C:\Program Files\Microsoft Office\Office16\ospp.vbs";
             
 
-            listBox1.Items.Add("Checking office location");
+            
 
             if (File.Exists(office16filelocation) && isadmin == true)
             {

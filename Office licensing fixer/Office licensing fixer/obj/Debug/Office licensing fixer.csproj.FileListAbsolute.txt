@@ -1,0 +1,10 @@
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\bin\Debug\Office licensing fixer.exe.config
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\bin\Debug\Office licensing fixer.exe
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\bin\Debug\Office licensing fixer.pdb
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\obj\Debug\Office licensing fixer.csprojAssemblyReference.cache
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\obj\Debug\Office_licensing_fixer.Form1.resources
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\obj\Debug\Office_licensing_fixer.Properties.Resources.resources
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\obj\Debug\Office licensing fixer.csproj.GenerateResource.cache
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\obj\Debug\Office licensing fixer.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\obj\Debug\Office licensing fixer.exe
+C:\Users\Daniel\source\repos\Office licensing fixer\Office licensing fixer\obj\Debug\Office licensing fixer.pdb

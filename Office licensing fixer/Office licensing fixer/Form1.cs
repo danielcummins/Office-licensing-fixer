@@ -106,11 +106,14 @@ namespace Office_licensing_fixer
 
             
 
-            if (File.Exists(office16filelocation) && isadmin == true)
+            if (File.Exists(office16filelocation))
             {
                 listBox1.Items.Add("Office 16 detected");
-                button1.Enabled = true;
-                
+                if(isadmin == true)
+                {
+                    button1.Enabled = true;
+                }
+  
             }
             else 
             {

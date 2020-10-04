@@ -15,7 +15,8 @@ namespace Office_licensing_fixer
 {
 	public partial class Form1 : Form
 	{
-        
+        private Process cmd = new Process();
+
 
         public Form1()
 		{
@@ -24,29 +25,16 @@ namespace Office_licensing_fixer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Process cmd = new Process();
-            cmd.StartInfo.WorkingDirectory = @"C:\Program Files\Microsoft Office\Office16\";
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.StartInfo.Verb = "runas";
-            cmd.Start();
+            //run the /dstatus command
+            string statusoutput = Runcommand("cscript ospp.vbs /dstatus");
 
-            cmd.StandardInput.WriteLine("cscript ospp.vbs /dstatus");
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            
-
-            string statusoutput = cmd.StandardOutput.ReadToEnd();
-
-            //declar the string to search for
+            //dec the string to search for
             string s = "key:";
 
+            //dec keys array
             List<string> keys = new List<string>();
 
+            //itterate through the /dstatus command find all the "key:" strings and grab the next 5 chars afer it and put it into the keys array
             for (int i = 0; i < statusoutput.Length - s.Length + 1; i++)
             {
                 if (statusoutput.Substring(i, s.Length).Equals(s))
@@ -57,36 +45,26 @@ namespace Office_licensing_fixer
                     
                 }
             }
-
+            //run the command for each key and print
             foreach (string key in keys) 
             {
-                cmd.StartInfo.WorkingDirectory = @"C:\Program Files\Microsoft Office\Office16\";
-                cmd.StartInfo.FileName = "cmd.exe";
-                cmd.StartInfo.RedirectStandardInput = true;
-                cmd.StartInfo.RedirectStandardOutput = true;
-                cmd.StartInfo.CreateNoWindow = true;
-                cmd.StartInfo.UseShellExecute = false;
-                cmd.StartInfo.Verb = "runas";
-                cmd.Start();
-                listBox1.Items.Add("Removing: " + key);
-                string command_torun = "cscript ospp.vbs /unpkey:";
-                cmd.StandardInput.WriteLine(command_torun+key);
-                cmd.StandardInput.Flush();
-                cmd.StandardInput.Close();
-                cmd.WaitForExit();
+                
+                string output = Runcommand("cscript ospp.vbs /unpkey:"+key);
                 listBox1.Items.Add("Removed: " + key);
             }
-
+            //notify the user of completion
             listBox1.Items.Add("All keys removed - restart office and log in!");
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void Form1_Load(object sender, EventArgs e)
         {
             //check if run as admin and save as bool
             var identity = WindowsIdentity.GetCurrent();
             var principal = new WindowsPrincipal(identity);
             bool isadmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+
+            
             
 
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -121,6 +99,27 @@ namespace Office_licensing_fixer
             }
             
 
+        }
+
+        //function that takes a cmd command to be run as a string and returns its output as a string
+        private string Runcommand(string CommandToRun)
+        {
+            cmd.StartInfo.WorkingDirectory = @"C:\Program Files\Microsoft Office\Office16\";
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.StartInfo.Verb = "runas";
+            cmd.Start();
+
+            cmd.StandardInput.WriteLine(CommandToRun);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            string cmdreturn = cmd.StandardOutput.ReadToEnd();
+
+            return cmdreturn;
         }
         
 

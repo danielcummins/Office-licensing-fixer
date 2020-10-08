@@ -8,3 +8,14 @@ This program is designed to be used when Office is un-licensed with someone else
 1. Download the .exe file from [here](https://github.com/danielcummins/Office-licensing-fixer/blob/master/Office%20licensing%20fixer/Office%20licensing%20fixer/bin/Debug/Office%20licensing%20fixer.exe)
 2. Run the .exe file on the target machine and click the button to fix
 3. Close all office apps then reopen to check the license!
+
+
+## How it actually works
+
+This program automates the following commands from the office ospp.vbs file:
+
+Firstly this command to retrive all the keys
+`cscript ospp.vbs /dstatus`
+
+Then for each of the keys in that response this command is run
+`cscript ospp.vbs /unpkey:<key from command>`

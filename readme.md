@@ -6,7 +6,8 @@ This program is designed to be used when Office is un-licensed with someone else
 
 ## How to use the office license fixer
 1. Download the .exe file from [here](https://github.com/danielcummins/Office-licensing-fixer/blob/master/Office%20licensing%20fixer/Office%20licensing%20fixer/bin/Debug/Office%20licensing%20fixer.exe)
-2. Run the .exe file on the target machine and click the button to fix
+2. Run the .exe file as admin on the target machine
+3. Click the "Fix office license" button to fix
 3. Close all office apps then reopen to check the license!
 
 
